@@ -1,11 +1,12 @@
 #!/bin/bash
 
-########################### RUN INSTRUCTIONS ###########################################
+########################### RUN INSTRUCTIONS FOR TEST CASES###########################################
 # 1) cd ./data-wrangling
 # 2) source ./create_dir.sh
 # 3) source ./parse.sh
 
 ############################ OVERVIEW #########################################
+# About the Parse.sh script file which does the data wrangling:
 # The script when executed does the following
 # 1) Takes the /var/run/tentant/<integer_folder>/metrics.json files as the input for processing
 # INPUT - metrics.json data format
