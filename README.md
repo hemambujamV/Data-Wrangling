@@ -3,8 +3,6 @@ Data wrangling, sometimes referred to as data munging, is the process of transfo
 
 We have a number of different data wrangling tools, but this repository holds a from-the-scratch shell scripts to perform data-wrangling.
 
-### Written by: [Hemambujam Veeraraghavan] (https://www.linkedin.com/in/hemambujam-veeraraghavan-a34415bb/)
-
 Instruction to run the Script:
 
 1. Download the Parse file - parse.sh , to the unix root directory which contains the /var directory.
