@@ -39,6 +39,10 @@ Functionality of the Script:
 
 Instructions to run the test cases can be found in the "TestCase" folder.
 
+The expected output for the script will be in an .csv format:
+
+<a href="https://github.com/hemambujamV/Data-Wrangling/blob/master/single_1520234781.csv"><img src="https://github.com/hemambujamV/Data-Wrangling/blob/master/single_1520234781.csv" title="Output File" halign="right" height="60" />
+</a>
 
 
 
