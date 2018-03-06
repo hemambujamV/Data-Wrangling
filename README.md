@@ -3,6 +3,8 @@ Data wrangling, sometimes referred to as data munging, is the process of transfo
 
 We have a number of different data wrangling tools, but this repository holds a from-the-scratch shell scripts to perform data-wrangling.
 
+### Written by: [Hemambujam Veeraraghavan] (https://www.linkedin.com/in/hemambujam-veeraraghavan-a34415bb/)
+
 Instruction to run the Script:
 
 1. Download the Parse file - parse.sh , to the unix root directory which contains the /var directory.
@@ -10,6 +12,8 @@ Instruction to run the Script:
       Unix_shell > ./parse.sh &
 3. The output for this script can be found in the "csv" directory, which will be generated at the present working directory. Under this directory, a csv file will get generated for every 60 seconds and will be in the format: single_<timestamp>.csv. 
 
+<a href="https://github.com/hemambujamV/Data-Wrangling/blob/master/screenshot.png"><img src="https://github.com/hemambujamV/Data-Wrangling/blob/master/screenshot.png" title="Script Execution" halign="right" height="60" />
+</a>
 
 Note:
 The "&" is used to run the shell script in the background. We specifically use "&", as the script is expected to run every 60seconds.
