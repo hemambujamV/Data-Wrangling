@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ########################### RUN INSTRUCTIONS FOR TEST CASES###########################################
-# 1) cd ./data-wrangling
-# 2) source ./create_dir.sh
-# 3) source ./parse.sh
+# 1) Dpwnload the parse.sh file
+# 2) Unix_shell> ./parse.sh &
+# 3) Output single_<timestamp>.csv will be generated for every 60 seconds inside the auto-created "csv" directory at the present working directory level
 
 ############################ OVERVIEW #########################################
 # About the Parse.sh script file which does the data wrangling:
@@ -35,6 +35,7 @@
 #       gsub("[,]","",$2)   --> Substitues , with NONE type. 23, becomes 23
 # 5) timestamp command is added to the awk with -v argument (variable argument)
 #       timestamp=$(date +%s)
+# 6) The sleep command is used to take a snapshot of the required data for every 60 seconds.
 ##############################################################################
 
 if [ ! -d "csv" ]; then
