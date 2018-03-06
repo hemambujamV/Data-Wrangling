@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ####################### RUN INSTRUCTIONS #######################################
-# 1) cd ./data-wrangling
-# 2) source ./create_dir.sh 
+# 1) Download the create_dir.sh and metrics.json to any directory. 
+# 2) Unix_shell> ./create_dir.sh 
 
 ####################### FUNCTIONALITY  ########################################
 
 #The script when executed does the following:
-# 1) Creates the following directory structure inside the ./data-wrangling
-# 2) Copies metrics.json from the ./data-wrangling directory level to each of the /var/run/tentant/<1 to 10> directories
+# 1) Creates the following directory structure inside the present working directory
+# 2) Copies metrics.json from the directory level to each of the /var/run/tentant/<1 to 10> directories
 
 #####################   /var/run/tenant ##########################################
 #                              |
