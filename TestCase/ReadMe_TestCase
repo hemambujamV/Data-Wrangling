@@ -2,7 +2,7 @@
 #  Download and place the following files in the same directory
 #    a. create_dir.sh - Creates directory structure as /var/run/tenant/<integer_folders> and stores a sample metrics.json
 #    b. parse.sh - Parses the metrics.json files inside the /var/run/tenant/<integer_folders> ,extracts the required information and stores them in the required format in single.csv file
-#    c. monitor.sh - Runs the parsing file every 60seconds to capture a snapshot of the data from metrics.json files
+# 
 #    
 ######################################################################################################################################################################
 
