@@ -2,14 +2,13 @@
 #  Download and place the following files in the same directory
 #    a. create_dir.sh - Creates directory structure as /var/run/tenant/<integer_folders> and stores a sample metrics.json
 #    b. parse.sh - Parses the metrics.json files inside the /var/run/tenant/<integer_folders> ,extracts the required information and stores them in the required format in single.csv file
-# 
-#    
+#     
 ######################################################################################################################################################################
 
 ###################################################################### RUN INSTRUCTIONS ##############################################################################
-# 1. source ./create_dir.sh
-# 2. source ./parse.sh
-# 3. source ./monitor.sh
+# 1. Unix_shell> ./create_dir.sh
+# 2. Unix_shell> ./parse.sh &
+# 
 ######################################################################################################################################################################
 
 ##################################################################### create_dir.sh #################################################################################
@@ -57,14 +56,6 @@ Example:
 #       gsub("[,]","",$2)   --> Substitues , with NONE type. 23, becomes 23
 # 5) timestamp command is added to the awk with -v argument (variable argument)
 #       timestamp=$(date +%s)
+# 6) The sleep command is used to take a snapshot of the required data for every 60 seconds.
 #########################################################################################################################################################################
 
-#################################################################### monitor.sh  ########################################################################################
-# watch command in unix will run the specified command at regular intervals
-# In this case parse.sh (used to parse multiple metrics.json files and generate single.csv file) will be run every 60 seconds
-# Alternatively crontab can also be used to execute a command at regular intervals. It is however not used in the script
-#########################################################################################
-#watch -n 60 parse.sh
-#crontab -e
-#***** ./parse.sh
-##########################################################################################################################################################################
