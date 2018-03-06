@@ -1,0 +1,70 @@
+###################################################################### SETTING UP SCRIPTS FOR RUN ##################################################################################
+#  Download and place the following files in the same directory
+#    a. create_dir.sh - Creates directory structure as /var/run/tenant/<integer_folders> and stores a sample metrics.json
+#    b. parse.sh - Parses the metrics.json files inside the /var/run/tenant/<integer_folders> ,extracts the required information and stores them in the required format in single.csv file
+#    c. monitor.sh - Runs the parsing file every 60seconds to capture a snapshot of the data from metrics.json files
+#    
+######################################################################################################################################################################
+
+###################################################################### RUN INSTRUCTIONS ##############################################################################
+# 1. source ./create_dir.sh
+# 2. source ./parse.sh
+# 3. source ./monitor.sh
+######################################################################################################################################################################
+
+##################################################################### create_dir.sh #################################################################################
+
+#The script when executed does the following:
+# 1) Creates the following directory structure 
+# 2) Copies metrics.json from the current directory level to each of the /var/run/tentant/<integer_folders> directories
+
+Example:
+#####################   /var/run/tenant ##########################################
+#                              |
+#---------------------------------------------------------------------
+# |       |       |      |      |      |      |      |       |       |
+# 1       2       3      4      5      6      7      8       9       10
+# |       |       |      |      |      |      |      |       |       |
+# JSON   JSON    JSON   JSON   JSON   JSON   JSON   JSON    JSON    JSON
+########################################################################################################################################################################
+
+###################################################################### parse.sh ########################################################################################
+# The script when executed does the following
+# 1) Takes the /var/run/tentant/<integer_folder>/metrics.json files as the input for processing
+# INPUT - metrics.json data format
+#{
+#    "a": 23,
+#    "b": 43.2,
+#    ....
+#}
+# 2) Outputs single.csv containing the data in the following format
+#          Timestamp,TentantID,Metric,Value
+#          1520146989,1,a,23
+#          1520146989,1,b,43.2
+#          ......
+
+########################## FUNCTIONALITY ###################################
+# 1) awk command is used to parse through all metrics.json files inside /var/run/tenant/<integer_folder>/  and extract the required information
+# 2) awk is used to split every line based on a pattern and save the data to inbuilt variables $1 and $2 (awk '/pattern/ {action_command}')
+#       For eg. For the following line in metrics.json,
+#       "a": 23,
+# 3) To extract a and 23 and save into Inbuilt variables $1 and $2 respectively
+#       awk '/"*":/ {print "$1" , "$2"}   (For each line in metrics.json, when a pattern "*": is seen, 
+#       Save "a": --> $1 and 23, --> $2
+# 4) To extract a from "a": and 23 from 23,
+#       gsub is used to extract the required data as follows
+#       gsub("[:\"]","",$1) --> Substitutes " and : characters with NONE type. "a": becomes a
+#       gsub("[,]","",$2)   --> Substitues , with NONE type. 23, becomes 23
+# 5) timestamp command is added to the awk with -v argument (variable argument)
+#       timestamp=$(date +%s)
+#########################################################################################################################################################################
+
+#################################################################### monitor.sh  ########################################################################################
+# watch command in unix will run the specified command at regular intervals
+# In this case parse.sh (used to parse multiple metrics.json files and generate single.csv file) will be run every 60 seconds
+# Alternatively crontab can also be used to execute a command at regular intervals. It is however not used in the script
+#########################################################################################
+#watch -n 60 parse.sh
+#crontab -e
+#***** ./parse.sh
+##########################################################################################################################################################################
