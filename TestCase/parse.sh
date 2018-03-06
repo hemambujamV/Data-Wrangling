@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ########################### RUN INSTRUCTIONS ###########################################
-# 1) cd ./data-wrangling
-# 2) source ./create_dir.sh
-# 3) source ./parse.sh
+# 1) Download the scripts from the git repository into a unix folder
+# 2) Unix_shell> ./create_dir.sh
+# 3) Unix_shell> ./parse.sh &
 
 ############################ OVERVIEW #########################################
 # The script when executed does the following
@@ -14,7 +14,7 @@
 #    "b": 43.2,
 #    ....
 #}
-# 2) Outputs single.csv containing the data in the following format
+# 2) Outputs single.csv into the csv folder containing the data in the following format
 #          Timestamp,TentantID,Metric,Value
 #          1520146989,1,a,23
 #          1520146989,1,b,43.2
@@ -35,13 +35,20 @@
 # 5) timestamp command is added to the awk with -v argument (variable argument)
 #       timestamp=$(date +%s)
 ##############################################################################
-
+if [ ! -d "csv" ]; then
+    mkdir csv 
+fi
+echo "A new snapshot for last 60 seconds is now available at ./csv/single_<timestamp>.csv"
+while (true)
+do
 MYDIR="./var/run/tenant/"
 DIRS=`ls -l $MYDIR | egrep '^d' | awk '{print $9}'`
 timestamp=$(date +%s)
-echo "Timestamp,TentantID,Metric,Value" > ./single_$timestamp.csv
+echo "Timestamp,TentantID,Metric,Value" > csv/single_$timestamp.csv
 
 for DIR in $DIRS
 do 
-      awk -v timestamp=$(date +%s) -v y="$DIR" '/"*":/ {gsub("[:\"]","",$1); gsub("[,]","",$2); print timestamp","y","$1","$2}' ./var/run/tenant/$DIR/metrics.json >> ./single_$timestamp.csv
+  awk -v timestamp=$(date +%s) -v y="$DIR" '/"*":/ {gsub("[:\"]","",$1); gsub("[,]","",$2); print timestamp","y","$1","$2}' ./var/run/tenant/$DIR/metrics.json >> csv/single_$timestamp.csv
+done
+sleep 60
 done
