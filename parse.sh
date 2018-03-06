@@ -37,12 +37,20 @@
 #       timestamp=$(date +%s)
 ##############################################################################
 
+if [ ! -d "csv" ]; then
+    mkdir csv 
+fi
+echo "A new snapshot for last 60 seconds is now available at ./csv/single_<timestamp>.csv"
+while (true)
+do
 MYDIR="./var/run/tenant/"
 DIRS=`ls -l $MYDIR | egrep '^d' | awk '{print $9}'`
 timestamp=$(date +%s)
-echo "Timestamp,TentantID,Metric,Value" > ./single_$timestamp.csv
+echo "Timestamp,TentantID,Metric,Value" > csv/single_$timestamp.csv
 
 for DIR in $DIRS
-do
-      awk -v timestamp=$(date +%s) -v y="$DIR" '/"*":/ {gsub("[:\"]","",$1); gsub("[,]","",$2); print timestamp","y","$1","$2}' ./var/run/tenant/$DIR/metrics.json >> ./single_$timestamp.csv
+do 
+  awk -v timestamp=$(date +%s) -v y="$DIR" '/"*":/ {gsub("[:\"]","",$1); gsub("[,]","",$2); print timestamp","y","$1","$2}' ./var/run/tenant/$DIR/metrics.json >> csv/single_$timestamp.csv
+done
+sleep 60
 done
